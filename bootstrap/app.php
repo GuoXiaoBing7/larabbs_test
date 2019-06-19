@@ -1,5 +1,7 @@
 <?php
 
+/*加载自定义的助手函数存放在bootstrap/helpers.php下*/
+require_once __DIR__.'/helpers.php';
 /*
 |--------------------------------------------------------------------------
 | Create The Application

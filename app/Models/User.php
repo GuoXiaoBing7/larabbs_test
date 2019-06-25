@@ -18,6 +18,9 @@ class User extends Authenticatable
         'name', 'email', 'password','avatar','introduction',
     ];
 
+    public function topics(){
+        return $this->hasMany(Topic::class);
+    }
     /**
      * The attributes that should be hidden for arrays.
      *

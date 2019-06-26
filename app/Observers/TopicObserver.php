@@ -18,4 +18,8 @@ class TopicObserver
     {
         //
     }
+    //make_excerpt() 是我们自定义的辅助方法，我们需要在 helpers.php 文件中添加：
+    public function saving(Topic $topic){
+        $topic->excerpt = make_excerpt($topic->body);
+    }
 }

@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Providers;
+use App\Models\Reply;
 use App\Models\Topic;
+use App\Observers\ReplyObserver;
 use App\Observers\TopicObserver;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -22,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         //注册观察器，得写在boot里，不然TopicObserver不执行，也就是不会执行创建文章之前进行的操作（包括 生成make_excerpt截词 和 防止XSS攻击的HtmlPurifier插件的使用 ）
         Topic::observe(TopicObserver::class);
+        Reply::observe(ReplyObserver::class);
     }
 
     /**

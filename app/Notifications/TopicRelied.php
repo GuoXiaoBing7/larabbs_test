@@ -31,9 +31,10 @@ class TopicRelied extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database','mail'];
     }
 
+    //存入数据库的数据用来通知提示
    public function toDatabase($notifiable){
         $topic = $this->reply->topic;
         //存入数据库里的数据
@@ -47,6 +48,13 @@ class TopicRelied extends Notification
            'topic_title'=>$topic->title,
        ];
    }
+
+   //用来发送邮件
+    public function toMail($notifiable)
+    {
+        $url = route('topics.show',$this->reply->topic->id);
+        return (new MailMessage)->line('你的话题有新回复')->action('查看回复',$url);
+    }
 
     /**
      * Get the array representation of the notification.
